@@ -19,9 +19,11 @@
 // sample output
 // Case #1: 1
 // Case #2: 5    where 5 is remaining candies
+
+declare var require: any;
 declare var process: any;
 
-import readline from "readline";
+const readline = require("readline");
 let rl = readline.createInterface(process.stdin, process.stdout);
 
 function parseInput(lines: string[]) {
