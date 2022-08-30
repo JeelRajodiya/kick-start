@@ -30,19 +30,12 @@
 declare var require: any;
 declare var process: any;
 
-function isFirstDay(index: number) {
-	if (index == 0) {
-		return true;
-	}
-	return false;
-}
-
-function isLastDay(index: number, maxDays: number): boolean {
-	if (index === maxDays - 1) {
-		return true;
-	}
-	return false;
-}
+// function isLastDay(index: number, maxDays: number): boolean {
+// 	if (index === maxDays - 1) {
+// 		return true;
+// 	}
+// 	return false;
+// }
 
 function hasMaxCustThenBefore(customers: number[], index: number): boolean {
 	let max = 0;
@@ -81,13 +74,12 @@ function countRecordBreakingDays(customers: number[]): number {
 
     (isFirstDay(n) || hasMaxCustThenBefore(n)) && (isLastDay(n) || hasMaxCustThenAfter(n))
     */
-
+	let length = customers.length;
 	let recordBreakingDays = 0;
 	customers.forEach((customer, index) => {
 		if (
-			(isFirstDay(index) || hasMaxCustThenBefore(customers, index)) &&
-			(isLastDay(index, customers.length) ||
-				hasMaxCustThenAfter(customers, index))
+			(index === 0 || hasMaxCustThenBefore(customers, index)) &&
+			(index === length - 1 || hasMaxCustThenAfter(customers, index))
 		) {
 			recordBreakingDays++;
 		}
@@ -110,6 +102,9 @@ function handleData(input: string[]) {
 const readline = require("readline");
 let rl = readline.createInterface(process.stdin, process.stdout);
 let input: string[] = [];
+// takes 10-15 ms need to reduce 1/5 time => 2-3 ms
 rl.on("line", (line: string) => input.push(line)).on("close", () => {
+	console.time("Total");
 	handleData(input);
+	console.timeEnd("Total");
 });
