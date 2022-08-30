@@ -128,7 +128,7 @@ function handleData(input: string[]) {
 		let customersPerDay = input[test * 2].split(" ").map((s) => Number(s));
 
 		let recordBreakingDays = countRecordBreakingDays(customersPerDay);
-		console.log(`Case #${test}:${recordBreakingDays}`);
+		console.log(`Case #${test}: ${recordBreakingDays}`);
 	}
 }
 
