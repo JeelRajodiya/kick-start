@@ -35,9 +35,7 @@ function hasMaxCustThenBefore(
 	index: number,
 	day: number
 ): boolean {
-	let max = customers
-		.slice(0, index)
-		.reduce((a, b) => Math.max(a, b), -Infinity);
+	let max = Math.max(...customers.slice(0, index));
 
 	if (max < day) {
 		return true;
@@ -97,7 +95,10 @@ let rl = readline.createInterface(process.stdin, process.stdout);
 let input: string[] = [];
 // takes 10 ms need to reduce 1/5 time => 2 ms
 rl.on("line", (line: string) => input.push(line)).on("close", () => {
-	console.time("Total");
+	// console.time("Total");
 	handleData(input);
-	console.timeEnd("Total");
+	// console.timeEnd("Total");
 });
+
+// times => 1:38
+//
