@@ -30,16 +30,6 @@
 declare var require: any;
 declare var process: any;
 
-function hasMaxCustThenBefore(slice: number[], day: number): boolean {
-	let max = Math.max(...slice);
-
-	if (max < day) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 function countRecordBreakingDays(customers: number[]): number {
 	/* 
     Record breaking day will follow both of these conditions
@@ -53,7 +43,7 @@ function countRecordBreakingDays(customers: number[]): number {
 	let slice: number[] = [];
 	customers.forEach((day, index) => {
 		if (
-			(index === 0 || hasMaxCustThenBefore(slice, day)) &&
+			(index === 0 || Math.max(...slice) < day) &&
 			(index === length - 1 || customers[index + 1] < day)
 		) {
 			recordBreakingDays++;
