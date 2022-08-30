@@ -30,12 +30,8 @@
 declare var require: any;
 declare var process: any;
 
-function hasMaxCustThenBefore(
-	customers: number[],
-	index: number,
-	day: number
-): boolean {
-	let max = Math.max(...customers.slice(0, index));
+function hasMaxCustThenBefore(slice: number[], day: number): boolean {
+	let max = Math.max(...slice);
 
 	if (max < day) {
 		return true;
@@ -67,13 +63,15 @@ function countRecordBreakingDays(customers: number[]): number {
     */
 	let length = customers.length;
 	let recordBreakingDays = 0;
+	let slice: number[] = [];
 	customers.forEach((day, index) => {
 		if (
-			(index === 0 || hasMaxCustThenBefore(customers, index, day)) &&
+			(index === 0 || hasMaxCustThenBefore(slice, day)) &&
 			(index === length - 1 || hasMaxCustThenAfter(customers, index, day))
 		) {
 			recordBreakingDays++;
 		}
+		slice.push(customers[index]);
 	});
 	return recordBreakingDays;
 }
@@ -95,9 +93,9 @@ let rl = readline.createInterface(process.stdin, process.stdout);
 let input: string[] = [];
 // takes 10 ms need to reduce 1/5 time => 2 ms
 rl.on("line", (line: string) => input.push(line)).on("close", () => {
-	// console.time("Total");
+	console.time("Total");
 	handleData(input);
-	// console.timeEnd("Total");
+	console.timeEnd("Total");
 });
 
 // times => 1:38
