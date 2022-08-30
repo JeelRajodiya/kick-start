@@ -30,40 +30,33 @@
 declare var require: any;
 declare var process: any;
 
-// function isLastDay(index: number, maxDays: number): boolean {
-// 	if (index === maxDays - 1) {
-// 		return true;
-// 	}
-// 	return false;
-// }
+function hasMaxCustThenBefore(
+	customers: number[],
+	index: number,
+	day: number
+): boolean {
+	let max = customers
+		.slice(0, index)
+		.reduce((a, b) => Math.max(a, b), -Infinity);
 
-function hasMaxCustThenBefore(customers: number[], index: number): boolean {
-	let max = 0;
-	for (let i of customers.slice(0, index)) {
-		if (i > max) {
-			max = i;
-		}
-	}
-	let result: boolean;
-	if (max < customers[index]) {
-		result = true;
+	if (max < day) {
+		return true;
 	} else {
-		result = false;
+		return false;
 	}
-
-	return result;
 }
 
-function hasMaxCustThenAfter(customers: number[], index: number): boolean {
+function hasMaxCustThenAfter(
+	customers: number[],
+	index: number,
+	day: number
+): boolean {
 	// we only have to check for the next day. not all of the following days
-	let result: boolean;
-	if (customers[index + 1] < customers[index]) {
-		result = true;
+	if (customers[index + 1] < day) {
+		return true;
 	} else {
-		result = false;
+		return false;
 	}
-
-	return result;
 }
 
 function countRecordBreakingDays(customers: number[]): number {
@@ -76,10 +69,10 @@ function countRecordBreakingDays(customers: number[]): number {
     */
 	let length = customers.length;
 	let recordBreakingDays = 0;
-	customers.forEach((customer, index) => {
+	customers.forEach((day, index) => {
 		if (
-			(index === 0 || hasMaxCustThenBefore(customers, index)) &&
-			(index === length - 1 || hasMaxCustThenAfter(customers, index))
+			(index === 0 || hasMaxCustThenBefore(customers, index, day)) &&
+			(index === length - 1 || hasMaxCustThenAfter(customers, index, day))
 		) {
 			recordBreakingDays++;
 		}
@@ -102,7 +95,7 @@ function handleData(input: string[]) {
 const readline = require("readline");
 let rl = readline.createInterface(process.stdin, process.stdout);
 let input: string[] = [];
-// takes 10-15 ms need to reduce 1/5 time => 2-3 ms
+// takes 10 ms need to reduce 1/5 time => 2 ms
 rl.on("line", (line: string) => input.push(line)).on("close", () => {
 	console.time("Total");
 	handleData(input);
