@@ -67,11 +67,11 @@ function countRecordBreakingDays(customers: number[]): number {
 	customers.forEach((day, index) => {
 		if (
 			(index === 0 || hasMaxCustThenBefore(slice, day)) &&
-			(index === length - 1 || hasMaxCustThenAfter(customers, index, day))
+			(index === length - 1 || customers[index + 1] < day)
 		) {
 			recordBreakingDays++;
 		}
-		slice.push(customers[index]);
+		slice.push(day);
 	});
 	return recordBreakingDays;
 }
