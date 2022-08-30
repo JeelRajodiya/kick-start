@@ -40,19 +40,6 @@ function hasMaxCustThenBefore(slice: number[], day: number): boolean {
 	}
 }
 
-function hasMaxCustThenAfter(
-	customers: number[],
-	index: number,
-	day: number
-): boolean {
-	// we only have to check for the next day. not all of the following days
-	if (customers[index + 1] < day) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 function countRecordBreakingDays(customers: number[]): number {
 	/* 
     Record breaking day will follow both of these conditions
