@@ -41,53 +41,35 @@ function isLastDay(index: number, maxDays: number): boolean {
 	if (index === maxDays - 1) {
 		return true;
 	}
-
 	return false;
 }
 
 function hasMaxCustThenBefore(customers: number[], index: number): boolean {
 	let max = 0;
-
 	for (let i of customers.slice(0, index)) {
 		if (i > max) {
 			max = i;
 		}
 	}
-
 	let result: boolean;
-
 	if (max < customers[index]) {
-		// console.log(i, max, customers[index]);
-
 		result = true;
 	} else {
 		result = false;
 	}
-	// console.log(
-	// 	` Before Function: max=>${max},customers=>${
-	// 		customers[index]
-	// 	},slice=>${customers.slice(0, index)},result=>${result}`
-	// );
+
 	return result;
 }
 
 function hasMaxCustThenAfter(customers: number[], index: number): boolean {
 	// we only have to check for the next day. not all of the following days
-
 	let result: boolean;
-
 	if (customers[index + 1] < customers[index]) {
-		// console.log(i, max, customers[index]);
-
 		result = true;
 	} else {
 		result = false;
 	}
-	// console.log(
-	// 	` After Function: customers=>${customers[index]},nextDayCustomers=>${
-	// 		customers[index + 1]
-	// 	},result=>${result}`
-	// );
+
 	return result;
 }
 
@@ -102,12 +84,6 @@ function countRecordBreakingDays(customers: number[]): number {
 
 	let recordBreakingDays = 0;
 	customers.forEach((customer, index) => {
-		// console.log(
-		// 	isFirstDay(index),
-		// 	hasMaxCustThenBefore(customers, index),
-		// 	isLastDay(index, customers.length),
-		// 	hasMaxCustThenAfter(customers, index)
-		// );
 		if (
 			(isFirstDay(index) || hasMaxCustThenBefore(customers, index)) &&
 			(isLastDay(index, customers.length) ||
@@ -120,14 +96,13 @@ function countRecordBreakingDays(customers: number[]): number {
 }
 
 function handleData(input: string[]) {
-	// let pointer = 0;
 	const totalTests = Number(input[0]);
 	let test = 1;
-
 	for (; test <= totalTests; test++) {
 		let customersPerDay = input[test * 2].split(" ").map((s) => Number(s));
 
 		let recordBreakingDays = countRecordBreakingDays(customersPerDay);
+
 		console.log(`Case #${test}: ${recordBreakingDays}`);
 	}
 }
@@ -135,6 +110,6 @@ function handleData(input: string[]) {
 const readline = require("readline");
 let rl = readline.createInterface(process.stdin, process.stdout);
 let input: string[] = [];
-rl.on("line", (line: string) => input.push(line)).on("close", () =>
-	handleData(input)
-);
+rl.on("line", (line: string) => input.push(line)).on("close", () => {
+	handleData(input);
+});
