@@ -50,6 +50,6 @@ function parseInput(lines: string[]) {
 	}
 }
 
-let lines: string[] = [];
+let input: string[] = [];
 
-rl.on("line", (line) => lines.push(line)).on("close", () => parseInput(lines));
+rl.on("line", (line) => input.push(line)).on("close", () => parseInput(input));
