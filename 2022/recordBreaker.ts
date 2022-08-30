@@ -93,9 +93,9 @@ let rl = readline.createInterface(process.stdin, process.stdout);
 let input: string[] = [];
 // takes 10 ms need to reduce 1/5 time => 2 ms
 rl.on("line", (line: string) => input.push(line)).on("close", () => {
-	console.time("Total");
+	// console.time("Total");
 	handleData(input);
-	console.timeEnd("Total");
+	// console.timeEnd("Total");
 });
 
 // times => 1:38
