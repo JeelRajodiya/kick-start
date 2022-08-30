@@ -17,7 +17,7 @@
 // 6
 // 4 8 15 16 23 42
 // 9
-// 3 1 4 1 5 9 2 6 5
+//[ 3, 1 ,4 ,1 ,5 ,9 ,2 ,6 ,5]
 // 6
 // 9 9 9 9 9 9
 
@@ -53,11 +53,22 @@ function hasMaxCustThenBefore(customers: number[], index: number): boolean {
 			max = i;
 		}
 	}
+
+	let result: boolean;
+
 	if (max < customers[index]) {
-		return true;
+		// console.log(i, max, customers[index]);
+
+		result = true;
+	} else {
+		result = false;
 	}
-	// console.log(max, customers[index]);
-	return false;
+	console.log(
+		` Before Function: max=>${max},customers=>${
+			customers[index]
+		},slice=>${customers.slice(0, index)},result=>${result}`
+	);
+	return result;
 }
 
 function hasMaxCustThenAfter(customers: number[], index: number): boolean {
@@ -68,12 +79,22 @@ function hasMaxCustThenAfter(customers: number[], index: number): boolean {
 			max = i;
 		}
 	}
+
+	let result: boolean;
+
 	if (max < customers[index]) {
 		// console.log(i, max, customers[index]);
 
-		return true;
+		result = true;
+	} else {
+		result = false;
 	}
-	return false;
+	console.log(
+		` After Function: max=>${max},customers=>${
+			customers[index]
+		},slice=>${customers.slice(index + 1)},result=>${result}`
+	);
+	return result;
 }
 
 function countRecordBreakingDays(customers: number[]): number {
@@ -87,16 +108,17 @@ function countRecordBreakingDays(customers: number[]): number {
 
 	let recordBreakingDays = 0;
 	customers.forEach((customer, index) => {
-		console.log(
-			isFirstDay(index),
-			hasMaxCustThenBefore(customers, index),
-			isLastDay(index, customers.length),
-			hasMaxCustThenAfter(customers, index)
-		);
+		// console.log(
+		// 	isFirstDay(index),
+		// 	hasMaxCustThenBefore(customers, index),
+		// 	isLastDay(index, customers.length),
+		// 	hasMaxCustThenAfter(customers, index)
+		// );
 		if (
-			(isFirstDay(index) || hasMaxCustThenAfter(customers, index)) &&
-			(isLastDay(index, customers.length) ||
-				hasMaxCustThenBefore(customers, index))
+			isFirstDay(index) ||
+			(hasMaxCustThenBefore(customers, index) &&
+				(isLastDay(index, customers.length) ||
+					hasMaxCustThenAfter(customers, index)))
 		) {
 			recordBreakingDays++;
 		}
@@ -106,4 +128,4 @@ function countRecordBreakingDays(customers: number[]): number {
 
 // const readline = require("readline");
 // let rl = readline.createInterface(process.stdin, process.stdout);
-console.log(countRecordBreakingDays([4, 8, 15, 16, 23, 42]));
+console.log(countRecordBreakingDays([3, 1, 4, 1, 5, 9, 2, 6, 5]));
