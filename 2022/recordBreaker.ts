@@ -53,7 +53,6 @@ function countRecordBreakingDays(customers: number[], length: number): number {
 }
 
 function handleData(input: string[]) {
-	const totalTests = Number(input[0]);
 	input = input.slice(1);
 
 	let test = 1;
