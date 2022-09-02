@@ -38,7 +38,6 @@ function countRecordBreakingDays(customers: number[]): number {
 
     (isFirstDay(n) || hasMaxCustThenBefore(n)) && (isLastDay(n) || hasMaxCustThenAfter(n))
     */
-	let length = customers.length;
 	let recordBreakingDays = 0;
 	let previousRecord: number = 0;
 	customers.forEach((day, index) => {
@@ -54,15 +53,25 @@ function countRecordBreakingDays(customers: number[]): number {
 }
 
 function handleData(input: string[]) {
-	const totalTests = Number(input[0]);
+	input = input.slice(1);
+
 	let test = 1;
-	for (; test <= totalTests; test++) {
-		let customersPerDay = input[test * 2].split(" ").map((s) => Number(s));
+	let isChunked = false;
+	let length = 0;
+	input.forEach((line) => {
+		if (isChunked) {
+			let customersPerDay = line.split(" ").map((s) => Number(s));
 
-		let recordBreakingDays = countRecordBreakingDays(customersPerDay);
+			let recordBreakingDays = countRecordBreakingDays(customersPerDay);
 
-		console.log(`Case #${test}: ${recordBreakingDays}`);
-	}
+			console.log(`Case #${test}: ${recordBreakingDays}`);
+			test++;
+			isChunked = false;
+		} else {
+			length = Number(line);
+			isChunked = true;
+		}
+	});
 }
 
 const readline = require("readline");
