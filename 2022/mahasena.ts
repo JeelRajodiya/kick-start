@@ -33,6 +33,20 @@ Example 3
 Input:
 4
 11 12 13 14
+Output:
+NOT READY
+Example 4
+Input:
+3
+2 3 4
+Output:
+READY FOR BATTLE
+Example 5
+Input:
+5
+1 2 3 4 5
+Output:
+NOT READY
 */
 // lucky => even
 // unlucky => odd
@@ -43,6 +57,10 @@ let ipt = `1
 2
 4
 11 12 13 14
+3
+2 3 4
+5
+1 2 3 4 5
 `;
 
 function determineReadiness(n: number[]) {
