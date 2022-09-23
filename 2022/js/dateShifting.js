@@ -56,6 +56,7 @@ for test 1:
 
 */
 var ipt = "4\n7 3 \n6 6\n2 1\n14 2\n";
+
 const readline = require("readline");
 function calcBlocks(n) {
 	return Math.ceil(n / 5);
