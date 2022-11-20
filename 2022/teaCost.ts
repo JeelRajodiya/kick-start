@@ -70,3 +70,4 @@ let input: string[] = [];
 rl.on("line", (line) => input.push(line)).on("close", () =>
 	calcChargeForTea(input)
 );
+// Tag Test
