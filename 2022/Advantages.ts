@@ -34,4 +34,4 @@ let input: string[] = [];
 rl.on("line", (line) => input.push(line)).on("close", () =>
 	calculateAdvantage(input)
 );
-// I will create conflict
+// I will create conflict Yay
