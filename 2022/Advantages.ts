@@ -34,3 +34,4 @@ let input: string[] = [];
 rl.on("line", (line) => input.push(line)).on("close", () =>
 	calculateAdvantage(input)
 );
+// main branch
