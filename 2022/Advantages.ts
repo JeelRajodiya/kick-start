@@ -35,3 +35,4 @@ rl.on("line", (line) => input.push(line)).on("close", () =>
 	calculateAdvantage(input)
 );
 // I'm the main branch
+// test
