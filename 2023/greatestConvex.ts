@@ -68,7 +68,6 @@ function greatestConvex(lines: string[]) {
 		if (!flag) {
 			console.log(-1);
 		}
-		// console.log(Math.max(...thatNumbers));
 	}
 }
 
