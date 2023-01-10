@@ -42,6 +42,7 @@ YES
 1 4 4
 
 */
+
 type answer = "NO";
 function processArray(array: number[]): number[] | answer {
 	let sum = array[0];
