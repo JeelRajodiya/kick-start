@@ -110,3 +110,4 @@ let input: string[] = [];
 rl.on("line", (line) => input.push(line)).on("close", () => {
 	parallelProjection(input);
 });
+//0
